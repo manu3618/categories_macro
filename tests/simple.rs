@@ -3,6 +3,7 @@ mod tests {
 
     use categories_macro::Category;
     use std::collections::HashSet;
+
     #[derive(Category, Hash, Eq, PartialEq, Debug)]
     enum Direction {
         Est,
