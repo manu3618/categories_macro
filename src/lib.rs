@@ -20,11 +20,15 @@ pub fn derive_category(item: TokenStream) -> TokenStream {
     for elts in tokens {
         match (elts.first(), elts.get(1)) {
             (Some(Ident(x)), Some(Punct(_))) => new_func.push(format!("v.push(Self::{x});")),
+            (Some(Ident(x)), Some(Group(_))) => {
+                new_func.push(format!("v.push(Self::{x}(Default::default()));"))
+            }
             _ => {
                 // TODO: handle other cases
             }
         }
     }
+
     new_func.push("v}\n}".into());
     new_func.join("\n").parse().unwrap()
 }

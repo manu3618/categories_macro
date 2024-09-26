@@ -28,4 +28,22 @@ mod tests {
             wanted
         )
     }
+
+    #[derive(Category, Eq, PartialEq, Debug)]
+    enum Ingredient {
+        Butter,
+        Eggs(usize),
+        Flour,
+        Sugar,
+    }
+
+    #[test]
+    fn complexe_expansion() {
+        let ingredients = Ingredient::categories();
+        assert_eq!(ingredients.len(), 4);
+        assert!(ingredients.contains(&Ingredient::Eggs(usize::default())));
+        assert!(ingredients.contains(&Ingredient::Butter));
+        assert!(ingredients.contains(&Ingredient::Flour));
+        assert!(ingredients.contains(&Ingredient::Sugar));
+    }
 }
